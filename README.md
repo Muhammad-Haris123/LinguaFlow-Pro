@@ -1,118 +1,105 @@
-# 🌐 LinguaFlow Pro - Enterprise Translation Platform
+# LinguaFlow Pro
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![React](https://img.shields.io/badge/React-18.0+-61dafb.svg)](https://reactjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688.svg)](https://fastapi.tiangolo.com/)
+A fast translation platform built with React and FastAPI, optimized for GPU acceleration. This project provides real-time translation services with a modern web interface.
 
-> **Ultra-fast GPU-optimized translation platform powered by RTX 5060 Ti. Sub-2-second responses with enterprise-grade reliability.**
+## What it does
 
-## ✨ Features
+LinguaFlow Pro translates text between multiple languages using machine learning models. The backend runs on FastAPI with PyTorch for model inference, while the frontend is built with React and Tailwind CSS for a clean user experience.
 
-- 🚀 **GPU-Accelerated**: Optimized for RTX 5060 Ti with CUDA support
-- ⚡ **Ultra-Fast**: Sub-2-second translation responses
-- 🌍 **Multi-Language**: Support for 12+ languages
-- 🎨 **Modern UI**: Beautiful React frontend with Tailwind CSS
-- 🔒 **Enterprise-Ready**: Professional-grade security and reliability
-- 📊 **Analytics**: Usage tracking and performance metrics
-- 🎯 **Batch Processing**: Upload CSV files for bulk translation
-- 🌙 **Dark/Light Mode**: Beautiful theme switching
+## Features
 
-## 🛠️ Tech Stack
+- Real-time text translation
+- Support for 12 languages including English, German, French, Spanish, and more
+- GPU acceleration for faster processing
+- Batch translation for CSV files
+- Translation history and favorites
+- Dark and light theme support
+- Responsive design for mobile and desktop
 
-### Backend
-- **FastAPI** - Modern Python web framework
-- **PyTorch** - Deep learning framework
-- **Transformers** - Hugging Face model library
-- **CUDA** - GPU acceleration
-- **Redis** - Caching layer
+## Requirements
 
-### Frontend
-- **React 18** - Modern UI framework
-- **Tailwind CSS** - Utility-first CSS
-- **Framer Motion** - Smooth animations
-- **Lucide React** - Beautiful icons
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Python 3.8+
-- Node.js 16+
-- CUDA-compatible GPU (optional but recommended)
+- Python 3.8 or higher
+- Node.js 16 or higher
+- CUDA-compatible GPU (optional but recommended for better performance)
 - Git
 
-### Installation
+## Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/linguaflow-pro.git
-   cd linguaflow-pro
-   ```
+### Backend Setup
 
-2. **Backend Setup**
-   ```bash
-   # Create virtual environment
-   python -m venv venv
-   
-   # Activate virtual environment
-   # Windows
-   venv\\Scripts\\activate
-   # macOS/Linux
-   source venv/bin/activate
-   
-   # Install dependencies
-   pip install -r requirements.txt
-   
-   # Start backend server
-   cd backend
-   uvicorn main:app --reload --host 0.0.0.0 --port 8000
-   ```
+1. Navigate to the project directory and create a virtual environment:
+```bash
+cd backend
+python -m venv venv
+```
 
-3. **Frontend Setup**
-   ```bash
-   # Install dependencies
-   cd frontend
-   npm install
-   
-   # Start development server
-   npm start
-   ```
+2. Activate the virtual environment:
+```bash
+# Windows
+venv\Scripts\activate
 
-4. **Access the Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Docs: http://localhost:8000/docs
+# macOS/Linux
+source venv/bin/activate
+```
 
-## 📖 API Documentation
+3. Install Python dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-### Endpoints
+4. Start the FastAPI server:
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
 
-- `GET /health` - Health check
-- `POST /translate` - Translate text
-- `GET /languages` - Get supported languages
-- `GET /stats` - Get API statistics
+### Frontend Setup
 
-### Example Translation Request
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
 
+2. Install Node.js dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm start
+```
+
+The application will be available at http://localhost:3000, with the API running on http://localhost:8000.
+
+## Usage
+
+1. Open the web interface in your browser
+2. Select source and target languages from the dropdown menus
+3. Type or paste text in the source text area
+4. Click the Translate button to get the translation
+5. Use the copy, share, or favorite buttons to manage translations
+
+For batch processing, upload a CSV file with text to translate multiple entries at once.
+
+## API Endpoints
+
+- `GET /health` - Check if the service is running
+- `POST /translate` - Translate text from one language to another
+- `GET /languages` - Get list of supported languages
+- `GET /stats` - Get API usage statistics
+
+Example translation request:
 ```bash
 curl -X POST "http://localhost:8000/translate" \
      -H "Content-Type: application/json" \
      -d '{
-       "text": "Hello, world!",
+       "text": "Hello world",
        "source_language": "en",
-       "target_language": "de",
-       "max_length": 50
+       "target_language": "de"
      }'
 ```
 
-## 🎯 Performance
-
-- **GPU Mode**: 1-2 seconds per translation
-- **CPU Mode**: 3-5 seconds per translation
-- **Cached**: <0.1 seconds for repeated translations
-- **Batch**: 100+ translations per minute
-
-## 🌍 Supported Languages
+## Supported Languages
 
 - English (en)
 - German (de)
@@ -127,66 +114,53 @@ curl -X POST "http://localhost:8000/translate" \
 - Arabic (ar)
 - Hindi (hi)
 
-## 🔧 Configuration
+## Performance
 
-### Environment Variables
+With GPU acceleration, translations typically complete in 1-2 seconds. On CPU-only systems, expect 3-5 seconds per translation. Repeated translations are cached for faster response times.
 
-```bash
-# Backend
-CUDA_VISIBLE_DEVICES=0  # GPU device
-REDIS_URL=redis://localhost:6379  # Redis cache
-MODEL_PATH=trained_translation_model  # Custom model path
-
-# Frontend
-REACT_APP_API_URL=http://localhost:8000  # Backend URL
-```
-
-## 📊 Project Structure
+## Project Structure
 
 ```
 linguaflow-pro/
-├── backend/                 # FastAPI backend
-│   ├── main.py             # Main application
-│   ├── requirements.txt    # Python dependencies
-│   └── trained_translation_model/  # Model files
-├── frontend/               # React frontend
+├── backend/           # FastAPI application
+│   ├── main.py       # Main server file
+│   └── requirements.txt
+├── frontend/         # React application
 │   ├── src/
-│   │   ├── App.js         # Main component
-│   │   ├── App.css        # Styles
-│   │   └── components/    # UI components
-│   ├── package.json       # Node dependencies
-│   └── tailwind.config.js # Tailwind config
-├── docs/                  # Documentation
-├── tests/                 # Test files
-├── .gitignore            # Git ignore rules
-└── README.md             # This file
+│   │   ├── App.js    # Main component
+│   │   └── App.css   # Styles
+│   └── package.json
+├── docs/            # Documentation
+└── tests/           # Test files
 ```
 
-## 🤝 Contributing
+## Configuration
+
+The application uses environment variables for configuration:
+
+- `CUDA_VISIBLE_DEVICES` - GPU device selection
+- `REDIS_URL` - Redis cache connection
+- `MODEL_PATH` - Custom model directory
+
+## Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-## 🙏 Acknowledgments
+## Troubleshooting
 
-- [Hugging Face Transformers](https://huggingface.co/transformers/)
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [React](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+If you encounter issues:
 
-## 📞 Support
+1. Make sure all dependencies are installed correctly
+2. Check that Python and Node.js versions meet requirements
+3. Verify GPU drivers are installed if using CUDA acceleration
+4. Check the console for error messages
 
-- 📧 Email: support@linguaflow-pro.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/linguaflow-pro/issues)
-- 📖 Docs: [Documentation](https://docs.linguaflow-pro.com)
-
----
-
-**Made with ❤️ by the LinguaFlow Pro Team**
+For persistent issues, please open an issue on GitHub with details about your setup and the error messages you're seeing.
