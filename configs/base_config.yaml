@@ -1,0 +1,53 @@
+# Base configuration for multilingual translation model training
+
+# Data configuration
+languages: ['en', 'de', 'fr']  # Source and target languages
+max_length: 128  # Maximum sequence length
+cache_dir: './data/cache'  # Directory for cached data
+tokenizer_model: 'facebook/mbart-large-50'  # Tokenizer model name
+
+# Model configuration
+src_vocab_size: 10000  # Source vocabulary size
+tgt_vocab_size: 10000  # Target vocabulary size
+d_model: 512  # Model dimension
+n_heads: 8  # Number of attention heads
+n_layers: 6  # Number of transformer layers
+d_ff: 2048  # Feed-forward dimension
+dropout: 0.1  # Dropout rate
+
+# Training configuration
+batch_size: 32  # Training batch size
+num_epochs: 10  # Number of training epochs
+learning_rate: 1e-4  # Learning rate
+gradient_clip: 1.0  # Gradient clipping threshold
+warmup_steps: 4000  # Number of warmup steps
+use_amp: true  # Use automatic mixed precision
+
+# Logging and checkpointing
+log_interval: 100  # Log every N batches
+save_interval: 1000  # Save checkpoint every N batches
+checkpoint_dir: './checkpoints'  # Directory for checkpoints
+
+# System configuration
+num_workers: 4  # Number of data loading workers
+device: 'auto'  # Device to use (auto, cpu, cuda)
+
+# Evaluation configuration
+eval_metrics: ['bleu', 'chrf', 'ter']  # Metrics to compute
+beam_size: 4  # Beam search size for evaluation
+max_eval_length: 100  # Maximum length for evaluation
+
+# Data augmentation
+use_back_translation: false  # Use back-translation for data augmentation
+augmentation_ratio: 0.1  # Ratio of augmented data
+
+# Regularization
+label_smoothing: 0.1  # Label smoothing factor
+weight_decay: 0.01  # Weight decay for optimizer
+
+# Early stopping
+patience: 5  # Number of epochs to wait before early stopping
+min_delta: 0.001  # Minimum change to qualify as improvement
+
+
+
